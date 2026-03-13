@@ -1,4 +1,4 @@
-package com.leang.authservice.exception;
+package com.example.repo_public_dependency.exception;
 
 
 import org.springframework.http.HttpStatus;

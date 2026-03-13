@@ -1,4 +1,4 @@
-package com.leang.authservice.exception;
+package com.example.repo_public_dependency.exception;
 
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 
-@Slf4j
+//@Slf4j
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(NotFoundException.class)
@@ -43,7 +43,7 @@ public class GlobalExceptionHandler {
         ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.FORBIDDEN);
         problemDetail.setTitle("Forbidden");
         problemDetail.setDetail(e.getMessage());
-        problemDetail.setProperty("timestamp", java.time.OffsetDateTime.now());
+        problemDetail.setProperty("timestamp", OffsetDateTime.now());
 
         return problemDetail;
     }
@@ -86,7 +86,7 @@ public class GlobalExceptionHandler {
         Map<String, String> errors = new HashMap<>();
 
         // Loop through each invalid parameter validation result
-        e.getParameterValidationResults().forEach(parameterError -> {
+        e.getAllValidationResults().forEach(parameterError -> {
             String paramName = parameterError.getMethodParameter().getParameterName(); // Get parameter name
 
             // Loop through each validation error message for this parameter
