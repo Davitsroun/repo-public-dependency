@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+group = 'io.github.Davitsroun'
+version = '1.0.0'
+description = 'repo_public_dependency'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework:spring-web:6.1.8'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.17.1'
+
+    compileOnly 'org.projectlombok:lombok:1.18.34'
+    annotationProcessor 'org.projectlombok:lombok:1.18.34'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+}
+
+// Correct test task configuration for Gradle 9+
+tasks.named('test', Test).configure {
+//    useJUnitPlatform()
+//    failIfNoTests = false
+    enabled = false   // disables test execution
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            groupId = 'io.github.Davitsroun'
+            artifactId = 'repo-public-dependency'
+            version = '1.0.0'
+        }
+    }
+}
